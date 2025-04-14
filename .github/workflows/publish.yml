@@ -14,27 +14,27 @@ jobs:
   version:
     runs-on: ubuntu-latest
     steps:
-      - uses: rees/kmp/.github/actions/version@master
+      - uses: rees46/kmp/.github/actions/version@master
         if: github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch'
         with:
-          appId: ${{ vars.PUBLIVERSIONER_ID }}
-          appSecret: ${{ secrets.PUBLIVERSIONER_SECRET }}
+          appId: ${{ vars.ATLANTIS_SUPER_BOT_APP_ID }}
+          appSecret: ${{ secrets.ATLANTIS_SUPER_BOT_PRIVATE_KEY }}
 
   publish:
     needs: version
     runs-on: ubuntu-latest
     steps:
-      - uses: rees/kmp/.github/actions/publish@master
+      - uses: rees46/kmp/.github/actions/publish@master
         with:
-          appId: ${{ vars.PUBLIVERSIONER_ID }}
-          appSecret: ${{ secrets.PUBLIVERSIONER_SECRET }}
+          appId: ${{ vars.ATLANTIS_SUPER_BOT_APP_ID }}
+          appSecret: ${{ secrets.ATLANTIS_SUPER_BOT_PRIVATE_KEY }}
           githubToken: ${{ secrets.GITHUB_TOKEN }}
 
   release:
     needs: [publish, version]
     runs-on: ubuntu-latest
     steps:
-      - uses: rees/kmp/.github/actions/release@master
+      - uses: rees46/kmp/.github/actions/release@master
         with:
-          appId: ${{ vars.PUBLIVERSIONER_ID }}
-          appSecret: ${{ secrets.PUBLIVERSIONER_SECRET }}
+          appId: ${{ vars.ATLANTIS_SUPER_BOT_APP_ID }}
+          appSecret: ${{ secrets.ATLANTIS_SUPER_BOT_PRIVATE_KEY }}

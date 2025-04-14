@@ -14,19 +14,19 @@ jobs:
   version:
     runs-on: ubuntu-latest
     steps:
-      - uses: rees/kmp/.github/actions/version@master
+      - uses: rees46/kmp/.github/actions/version@master
         if: github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch'
         with:
-          appId: ${{ vars.PUBLIVERSIONER_ID }}
+          appId: ${{ vars.PUBLIVERSIONER_IDD }}
           appSecret: ${{ secrets.PUBLIVERSIONER_SECRET }}
 
   publish:
     needs: version
     runs-on: ubuntu-latest
     steps:
-      - uses: rees/kmp/.github/actions/publish@master
+      - uses: rees46/kmp/.github/actions/publish@master
         with:
-          appId: ${{ vars.PUBLIVERSIONER_ID }}
+          appId: ${{ vars.PUBLIVERSIONER_IDD }}
           appSecret: ${{ secrets.PUBLIVERSIONER_SECRET }}
           githubToken: ${{ secrets.GITHUB_TOKEN }}
 
@@ -34,7 +34,7 @@ jobs:
     needs: [publish, version]
     runs-on: ubuntu-latest
     steps:
-      - uses: rees/kmp/.github/actions/release@master
+      - uses: rees46/kmp/.github/actions/release@master
         with:
-          appId: ${{ vars.PUBLIVERSIONER_ID }}
+          appId: ${{ vars.PUBLIVERSIONER_IDD }}
           appSecret: ${{ secrets.PUBLIVERSIONER_SECRET }}

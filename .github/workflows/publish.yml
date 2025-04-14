@@ -31,7 +31,7 @@ jobs:
       SIGNING_SECRET_KEY_RING_FILE: com.rees46.key.gpg
       SIGNING_SECRET_KEY_RING_FILE_LOCATION: ./
       OSSRH_USERNAME: ${{ vars.OSSRH_USERNAME }}
-      VARIANT_NAME: ${{ vars.REES_VARIANT_NAME }}
+      VARIANT_NAME: ${{ vars.VARIANT_NAME }}
       URL: ${{ vars.URL }}
       MAVEN_REPOSITORY_URL: ${{ vars.MAVEN_REPOSITORY_URL }}
       GRADLE_VERSION: 8.8

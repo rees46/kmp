@@ -37,10 +37,16 @@ runs:
       env:
         FILE_PATH: ./build.gradle.kts
       run: |
-        version=$(grep -oP '^\s*version\s*=\s*"\K[^"]+' $FILE_PATH | head -1)
+        version=$(grep -E 'version\s*=\s*"[^"]+"' $FILE_PATH | head -1 | awk -F'"' '{print $2}')
+
+        if [ -z "$version" ]; then
+          echo "Error: Failed to extract version from $FILE_PATH"
+          exit 1
+        fi
+
+        echo "Extracted version: $version"
         echo "versionName=$version" >> $GITHUB_ENV
         echo "versionName=$version" >> $GITHUB_OUTPUT
-        echo $version
 
     # - name: Commit changes
     #   id: committer

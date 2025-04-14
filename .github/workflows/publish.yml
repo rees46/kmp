@@ -14,7 +14,9 @@ jobs:
   version:
     runs-on: ubuntu-latest
     steps:
-      - uses: rees46/kmp/.github/actions/version@master
+      # TODO uncomment
+      # - uses: rees46/kmp/.github/actions/version@master
+      - uses: rees46/kmp/.github/actions/version@feat/sonatype-publish
         if: github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch'
         with:
           appId: ${{ vars.PUBLIVERSIONER_ID }}

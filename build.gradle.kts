@@ -5,6 +5,7 @@ plugins {
 }
 
 allprojects {
+    group = "com.rees46"
     version = "1.0.3"
 }
 
@@ -50,4 +51,8 @@ nexusPublishing {
             snapshotRepositoryUrl.set(uri("https://s01.oss.sonatype.org/content/repositories/snapshots/"))
         }
     }
+}
+
+tasks.withType<PublishToMavenRepository>().configureEach {
+    notCompatibleWithConfigurationCache("Nexus tasks are not compatible with config cache")
 }

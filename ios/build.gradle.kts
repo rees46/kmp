@@ -3,8 +3,8 @@ plugins {
     `java-gradle-plugin`
     `maven-publish`
 }
-group = "com.rees46.plugins"
-version = "1.0.0"
+
+apply(from = rootProject.file("publishing.gradle.kts"))
 
 repositories {
     mavenCentral()

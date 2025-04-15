@@ -3,8 +3,8 @@ plugins {
     `java-gradle-plugin`
     `maven-publish`
 }
-group = "com.rees46.plugins"
-version = "1.0.0"
+
+apply(from = rootProject.file("publishing.gradle.kts"))
 
 repositories {
     google()
@@ -14,7 +14,7 @@ repositories {
 
 dependencies {
     implementation(libs.kotlin.gradle.plugin)
-    implementation(libs.android.gradle.plugin)
+    compileOnly("com.android.tools.build:gradle:8.9.1")
 }
 
 gradlePlugin {

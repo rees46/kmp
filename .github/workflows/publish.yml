@@ -11,19 +11,18 @@ on:
   workflow_dispatch:
 
 jobs:
-  # version:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: rees46/kmp/.github/actions/version@master
-  #       if: github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch'
-  #       with:
-  #         appId: ${{ vars.PUBLIVERSIONER_ID }}
-  #         appSecret: ${{ secrets.PUBLIVERSIONER_SECRET }}
+  version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: rees46/kmp/.github/actions/version@master
+        if: github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch'
+        with:
+          appId: ${{ vars.PUBLIVERSIONER_ID }}
+          appSecret: ${{ secrets.PUBLIVERSIONER_SECRET }}
 
   publish:
-    # needs: version
-    # uses: rees46/workflow/.github/workflows/reusable-android-publish.yaml@master
-    uses: rees46/workflow/.github/workflows/reusable-android-publish.yaml@feat/sonatype-publish
+    needs: version
+    uses: rees46/workflow/.github/workflows/reusable-android-publish.yaml@master
     permissions: write-all
     with:
       appId: ${{ vars.PUBLIVERSIONER_ID }}
@@ -45,11 +44,11 @@ jobs:
       SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
       SIGNING_KEY_FILE_AS_BASE64_STRING: ${{ secrets.SIGNING_KEY_FILE_AS_BASE64_STRING }}
 
-  # release:
-  #   needs: [publish, version]
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: rees46/kmp/.github/actions/release@master
-  #       with:
-  #         appId: ${{ vars.PUBLIVERSIONER_ID }}
-  #         appSecret: ${{ secrets.PUBLIVERSIONER_SECRET }}
+  release:
+    needs: [publish, version]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: rees46/kmp/.github/actions/release@master
+        with:
+          appId: ${{ vars.PUBLIVERSIONER_ID }}
+          appSecret: ${{ secrets.PUBLIVERSIONER_SECRET }}

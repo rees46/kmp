@@ -1,0 +1,38 @@
+name: Repository synchronization
+
+on:
+  pull_request:
+  # TODO uncomment
+  #   types:
+  #     - closed
+  #   branches:
+  #     - master
+  # workflow_dispatch:
+
+jobs:
+  prepare:
+    # TODO uncomment
+    # if: github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    outputs:
+      replacements: ${{ steps.getReplacementsStep.outputs.replacements }}
+    steps:
+      # TODO uncomment
+      # - uses: rees46/shared/.github/actions/sync/read-replacements@master
+      - uses: rees46/shared/.github/actions/sync/read-replacements@feat/repo-sync
+        id: getReplacementsStep
+
+  repoSync:
+    needs: prepare
+    # TODO uncomment
+    # if: github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch'
+    # uses: rees46/shared/.github/workflows/repo-sync.yaml@master
+    uses: rees46/shared/.github/workflows/repo-sync.yaml@feat/repo-sync
+    secrets:
+      appSecret: ${{ secrets.REES46_PUBLISHER_SECRET }}
+    with:
+      appId: ${{ vars.REES46_PUBLISHER_ID }}
+      replacements: ${{ needs.prepare.outputs.replacements }}
+      repositoryOwner: rees46
+      reviewerUsername: iwwwanow
+      targetRepository: rees46/kmp

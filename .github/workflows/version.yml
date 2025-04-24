@@ -1,21 +1,22 @@
-name: Publish
+name: Bump version
 
 on:
   pull_request:
     types:
       - closed
     branches:
-      - "release/**"
+      - master
+      - "!release/**"
+    paths-ignore:
+      - ".github/**"
   workflow_dispatch:
 
 jobs:
-  publish:
-    needs: version
+  version:
     runs-on: ubuntu-latest
     steps:
-      - uses: rees46/kmp/.github/actions/publish@master
+      - uses: rees46/kmp/.github/actions/version@master
         if: github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch'
         with:
           appId: ${{ vars.PUBLIVERSIONER_ID }}
           appSecret: ${{ secrets.PUBLIVERSIONER_SECRET }}
-          githubToken: ${{ secrets.GITHUB_TOKEN }}

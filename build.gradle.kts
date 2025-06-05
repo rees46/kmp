@@ -132,9 +132,15 @@ tasks.register("updateVersion") {
 nexusPublishing {
   repositories {
     sonatype {
-      stagingProfileId.set(project.findProperty("stagingProfileId")?.toString() ?: "")
-      username.set(project.findProperty("sonataUsername")?.toString())
-      password.set(project.findProperty("sonataPassword")?.toString())
+      stagingProfileId.set(
+        project.findProperty("stagingProfileId")?.toString()
+          ?: throw GradleException("Property 'stagingProfileId' is not set! Please provide it with -PstagingProfileId=...")
+      )
+      username.set(project.findProperty("sonatypeUsername")?.toString()
+        ?: throw GradleException("Property 'sonatypeUsername' is not set! Please provide it with -PsonatypeUsername=..."))
+      password.set(project.findProperty("sonatypePassword")?.toString()
+        ?: throw GradleException("Property 'sonatypePassword' is not set! Please provide it with -PsonatypePassword=..."))
+
       nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/"))
       snapshotRepositoryUrl.set(uri("https://s01.oss.sonatype.org/content/repositories/snapshots/"))
     }

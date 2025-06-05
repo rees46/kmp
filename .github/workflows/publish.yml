@@ -14,7 +14,7 @@ jobs:
     permissions: write-all
     runs-on: ubuntu-latest
     steps:
-      - uses: rees46/kmp/.github/actions/publish@master
+      - uses: rees46/workflow/.github/workflows/reusable-android-publish.yaml@master
         if: github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch'
         with:
           appId: ${{ vars.PUBLIVERSIONER_ID }}

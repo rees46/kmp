@@ -6,16 +6,29 @@ on:
       - master
     paths-ignore:
       - ".github/**"
-      - "version.properties"
   workflow_dispatch:
 
 jobs:
+  find-release-commit:
+    # TODO uncomment
+    # uses: rees46/shared/.github/workflows/release-commit-finder.yaml@master
+    uses: rees46/shared/.github/workflows/release-commit-finder.yaml@refactor/workflow
+    secrets:
+      githubToken: ${{ secrets.GITHUB_TOKEN }}
+
   bump-version:
-    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && github.event.pull_request.merged == true && !startsWith(github.event.pull_request.head.ref, 'release/'))
-    uses: rees46/shared/.github/workflows/version.yaml@master
+    needs: find-release-commit
+    if: |
+      github.event_name == 'workflow_dispatch' || (
+        github.event_name == 'push' &&
+        needs.find-release-commit.outputs.hasCommit == 'false')
+    # TODO uncomment
+    # uses: rees46/shared/.github/workflows/multiplatform-version.yaml@master
+    uses: rees46/shared/.github/workflows/multiplatform-version.yaml@refactor/workflow
     permissions: write-all
     secrets:
       appSecret: ${{ secrets.PUBLIVERSIONER_SECRET }}
+      githubToken: ${{ secrets.GITHUB_TOKEN }}
     with:
       appId: ${{ vars.PUBLIVERSIONER_ID }}
       reviewerUsername: iwwwanow

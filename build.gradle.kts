@@ -81,7 +81,9 @@ allprojects {
   }
 
   signing {
-    setRequired { gradle.taskGraph.allTasks.any { it is PublishToMavenRepository } }
+    setRequired {
+      gradle.startParameter.taskNames.any { it.contains("publish") }
+    }
 
     val signing_keyId: String? by project
     val signing_key: String? by project

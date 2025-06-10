@@ -11,8 +11,8 @@ on:
 jobs:
   find-release-commit:
     # TODO uncomment
-    # uses: rees46/workflow/.github/workflows/release-commit-finder.yaml@master
-    uses: rees46/workflow/.github/workflows/release-commit-finder.yaml@refactor/workflow
+    # uses: rees46/workflow/.github/workflows/reusable-release-commit-finder.yaml@master
+    uses: rees46/workflow/.github/workflows/reusable-release-commit-finder.yaml@refactor/workflow
     secrets:
       githubToken: ${{ secrets.GITHUB_TOKEN }}
 

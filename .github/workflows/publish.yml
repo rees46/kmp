@@ -17,11 +17,11 @@ jobs:
       appId: ${{ vars.PUBLISHER_ID }}
       PROPERTIES_FILE: gradle.properties
       SIGNING_SECRET_KEY_RING_FILE: com.rees46.key.gpg
-      SIGNING_SECRET_KEY_RING_FILE_LOCATION: ./personalization-sdk
+      SIGNING_SECRET_KEY_RING_FILE_LOCATION: ./
       OSSRH_USERNAME: ${{ vars.OSSRH_USERNAME }}
       VARIANT_NAME: ${{ vars.REES_VARIANT_NAME }}
-      URL: ${{ vars.REES_REPO_URL }}
-      MAVEN_REPOSITORY_URL: ${{ vars.REES_MAVEN_URL }}
+      URL: https://maven.pkg.github.com/rees46/kmp
+      MAVEN_REPOSITORY_URL: https://maven.pkg.github.com/rees46/kmp
       GRADLE_VERSION: 8.8
     secrets:
       appSecret: ${{ secrets.PUBLISHER_SECRET }}

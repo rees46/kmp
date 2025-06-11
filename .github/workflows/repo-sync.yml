@@ -1,12 +1,12 @@
 name: Repository synchronization
 
 on:
+  workflow_dispatch:
   pull_request:
     types:
       - closed
     branches:
       - master
-  workflow_dispatch:
 
 jobs:
   prepare:
@@ -21,9 +21,7 @@ jobs:
   repoSync:
     needs: prepare
     if: github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch'
-    # TODO uncomment
-    # uses: rees46/workflow/.github/workflows/repo-sync.yaml@master
-    uses: rees46/workflow/.github/workflows/repo-sync.yaml@refactor/workflow
+    uses: rees46/workflow/.github/workflows/repo-sync.yaml@master
     secrets:
       appSecret: ${{ secrets.REES46_PUBLISHER_SECRET }}
     with:

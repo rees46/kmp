@@ -9,7 +9,7 @@
           "releaseRules":
             [
               { "type": "refactor", "release": "patch" },
-              { "subject": "sync/release-*", "release": "minor" },
+              { "subject": "sync\\/release-.*", "release": "minor" },
               { "type": "sync", "release": "minor" },
               { "scope": "release", "release": "minor" },
             ],

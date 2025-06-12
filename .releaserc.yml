@@ -10,6 +10,7 @@
             [
               { "type": "refactor", "release": "patch" },
               { "type": "sync", "release": "minor" },
+              { "scope": "release", "release": "minor" },
             ],
           "parserOpts":
             { "noteKeywords": ["BREAKING CHANGE", "BREAKING CHANGES"] },

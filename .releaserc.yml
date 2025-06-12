@@ -12,6 +12,7 @@
               "types":
                 [
                   { type: "feat", section: "Features", hidden: false },
+                  { type: "sync", section: "Features", hidden: false },
                   { type: "fix", section: "Bug Fixes", hidden: false },
                   {
                     type: "perf",
@@ -26,7 +27,6 @@
                   { type: "test", section: "Other Updates", hidden: false },
                   { type: "build", section: "Other Updates", hidden: false },
                   { type: "ci", section: "Other Updates", hidden: false },
-                  { type: "sync", section: "Other Updates", hidden: false },
                 ],
             },
         },

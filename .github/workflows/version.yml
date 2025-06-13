@@ -13,6 +13,7 @@ jobs:
     uses: rees46/workflow/.github/workflows/reusable-release-commit-finder.yaml@master
     secrets:
       githubToken: ${{ secrets.GITHUB_TOKEN }}
+      commitMessage: "feat(release): version"
 
   bump-version:
     needs: find-release-commit

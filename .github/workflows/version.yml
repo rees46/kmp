@@ -20,7 +20,9 @@ jobs:
       github.event_name == 'workflow_dispatch' || (
         github.event_name == 'push' &&
         needs.find-release-commit.outputs.hasCommit == 'false')
-    uses: rees46/workflow/.github/workflows/reusable-multiplatform-version-bump.yaml@master
+    # TODO UNCOMMENT
+    # uses: rees46/workflow/.github/workflows/reusable-multiplatform-version-bump.yaml@master
+    uses: rees46/workflow/.github/workflows/reusable-multiplatform-version-bump.yaml@refactor/workflow
     permissions: write-all
     secrets:
       appSecret: ${{ secrets.PUBLIVERSIONER_SECRET }}

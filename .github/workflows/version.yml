@@ -11,6 +11,8 @@ on:
 jobs:
   find-release-commit:
     uses: rees46/workflow/.github/workflows/reusable-release-commit-finder.yaml@master
+    with:
+      commitMessage: "feat(release): version"
     secrets:
       githubToken: ${{ secrets.GITHUB_TOKEN }}
 

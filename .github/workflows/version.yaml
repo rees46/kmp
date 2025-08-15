@@ -31,4 +31,4 @@ jobs:
       githubToken: ${{ secrets.GITHUB_TOKEN }}
     with:
       appId: ${{ vars.PUBLIVERSIONER_ID }}
-      reviewerUsername: iwwwanow
+      reviewerUsername: ${{ vars.REVIEWER_USERNAME }}

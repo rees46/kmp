@@ -5,25 +5,23 @@ on:
     branches:
       - master
     paths-ignore:
-      - .github
+      - ".github/**"
   workflow_dispatch:
 
 jobs:
   find-release-commit:
     uses: rees46/workflow/.github/workflows/reusable-release-commit-finder.yaml@master
     with:
-      commitMessage: 'feat(release): version'
+      commitMessage: "feat(release): version"
     secrets:
       githubToken: ${{ secrets.GITHUB_TOKEN }}
 
   bump-version:
     needs: find-release-commit
     if: |
-      github.event_name == 'workflow_dispatch' ||
-      (
+      github.event_name == 'workflow_dispatch' || (
         github.event_name == 'push' &&
-        needs.find-release-commit.outputs.hasCommit == 'false'
-      )
+        needs.find-release-commit.outputs.hasCommit == 'false')
     uses: rees46/workflow/.github/workflows/reusable-multiplatform-version-bump.yaml@master
     permissions: write-all
     secrets:
@@ -31,4 +29,4 @@ jobs:
       githubToken: ${{ secrets.GITHUB_TOKEN }}
     with:
       appId: ${{ vars.PUBLIVERSIONER_ID }}
-      reviewerUsername: ${{ vars.REVIEWER_USERNAME }}
+      reviewerUsername: iwwwanow

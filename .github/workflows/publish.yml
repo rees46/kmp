@@ -1,0 +1,27 @@
+name: Publish to GH-packages
+
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  publish:
+    if: |
+      github.event_name == 'workflow_dispatch' ||
+      (
+        github.event.pull_request.merged == true &&
+        startsWith(github.head_ref, 'release/')
+      )
+    permissions: write-all
+    runs-on: ubuntu-latest
+    steps:
+      - uses: rees46/kmp/.github/actions/publish@master
+        if: github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch'
+        with:
+          appId: ${{ vars.PUBLIVERSIONER_ID }}
+          appSecret: ${{ secrets.PUBLIVERSIONER_SECRET }}
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
